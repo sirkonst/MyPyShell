@@ -29,14 +29,14 @@ class Shell:
 def shell(cmd, *cmds):
     """ Выполнить набор комманд и вернуть Shell объект """
     if cmds:
-        return [Shell(cmd) for cmd in cmds]
+        return [Shell(cmd)] + [Shell(cmd) for cmd in cmds]
     else:
         return Shell(cmd)
 
 if __name__ == '__main__':
     try:
-        print '\n'.join(sh.out for sh in shell('ls -l', 'who'))
-        print shell('ls')
+        #print '\n'.join(sh.out for sh in shell('ls -l', 'who'))
+        print shell('ls', 'echo test', 'echo rfref')
     except ShellError, x:
         print x
     
