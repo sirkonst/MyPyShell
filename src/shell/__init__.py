@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 
 """
-Выполнение shell комманд.
+Пример использования модуля:
 
-Пример:
-    from shell import sh, ShellError
-    try:
-        print sh('ls -l')
-    except ShellError, x:
-        print x
+from shell import ShellError, shell as sh
+
+try:
+    # run one command and print stdout
+    print sh('ls -l')
+    # run two and many command
+    shell('ls -l', 'who')
+    # run two and many command and print stdout
+    print '\n'.join(sh.out for sh in shell('ls -l', 'who'))
+except ShellError, x:
+    print x # Print stderr message
+
 """
 
 from shell import *
-
-sh = Shell
