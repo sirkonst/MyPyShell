@@ -13,18 +13,25 @@ class Shell:
     self.command - исходная комманда
     """
     def __init__(self, command):
-        com = Popen(command,  shell=True, stdout=PIPE, stderr=PIPE)
-        com.wait()
-        self.command = command
-        self.out = com.stdout.read().strip()
-        self.err = com.stderr.read().strip()
-        self.retcode = com.returncode
-        if self.retcode != 0:
-            raise ShellError, self.err
+        if not shelltest:
+            com = Popen(command,  shell=True, stdout=PIPE, stderr=PIPE)
+            com.wait()
+            self.command = command
+            self.out = com.stdout.read().strip()
+            self.err = com.stderr.read().strip()
+            self.retcode = com.returncode
+            self.test = shelltest
+            if self.retcode != 0:
+                raise ShellError, self.err
+        else:
+            print command
+            self.command = command
+            self.retcode = 0
+            self.test = shelltest
     def __str_(self):
-        return self.out
+        return shelltest and self.command or self.out
     def __repr__(self):
-        return self.out
+        return shelltest and self.command or self.out
 
 def shell(cmd, *cmds):
     """ Выполнить набор комманд и вернуть Shell объект """
