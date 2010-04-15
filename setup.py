@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='Shell',
-      version='0.0.2',
+      version='0.0.3',
       description='Shell execute',
       long_description = "My shell execute",
       author="Konstantin vz'One Enchant",
